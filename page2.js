@@ -1,6 +1,7 @@
     
     const imageContainer = document.getElementById("image-container");
     const storedImages = sessionStorage.getItem("images");
+    const treshold = 45; 
   
     if (storedImages) {
       const images = JSON.parse(storedImages);
@@ -23,13 +24,70 @@
   function randomNumber(max) {
     return Math.floor(Math.random() * (max + 1));
   }
+
+  function askPermission(){
+    if (DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === "function") {
+        DeviceOrientationEvent.requestPermission();
+    }
+  }
+
+  function getGyro() {
+    askPermission();
+    window.addEventListener('deviceorientation', (event) => {
+      rotation_degrees = event.alpha;
+      frontToBack_degrees = event.beta;
+      leftToRight_degrees = event.gamma;
+      if (frontToBack_degrees > treshold) {
+        document.getElementById("gyro").innerHTML = "Front to back: " + frontToBack_degrees;
+      } else if (leftToRight_degrees > treshold) {
+        document.getElementById("gyro").innerHTML = "Left to right: " + leftToRight_degrees;
+      } else {
+        document.getElementById("gyro").innerHTML = "No movement detected.";
+      }
+    })
+  }
+
+  /*function getGyro() {
+    DeviceOrientationEvent.requestPermission().then(response => {
+      if (response == 'granted') {
+        window.addEventListener('deviceorientation', (event) => {
+          rotation_degrees = event.alpha;
+          frontToBack_degrees = event.beta;
+          leftToRight_degrees = event.gamma;
+          if (frontToBack_degrees > treshold) {
+            document.getElementById("gyro").innerHTML = "Front to back: " + frontToBack_degrees;
+          } else if (leftToRight_degrees > treshold) {
+            document.getElementById("gyro").innerHTML = "Left to right: " + leftToRight_degrees;
+          } else {
+            document.getElementById("gyro").innerHTML = "No movement detected.";
+          }
+        })
+      }
+    })
+  }
   
+  function getGyro() {
+    DeviceOrientationEvent.requestPermission().then(response => {
+      if (response == 'granted') {
+        let gyro = new Gyroscope({ frequency: 60 });
+        gyro.addEventListener("reading", e => {
+          document.getElementById("gyro").innerHTML = "Angular velocity along the X-axis " + gyro.x; 
+        });
+        gyro.start();
+        document.getElementById("gyro").innerHTML = "Gyroscope is supported.";
+      } else {
+        document.getElementById("gyro").innerHTML = "Gyroscope permission denied.";
+      }
+    });
+  }
 
   function askPermission() {
     if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
         DeviceMotionEvent.requestPermission();
     }
   }
+
+
 
   let gyro = new Gyroscope({ frequency: 60 });
 
@@ -54,6 +112,6 @@
     });
   } else {
     console.log("Gyroskop ist nicht verfügbar.");
-  }
+  }*/
   
  
