@@ -1,0 +1,59 @@
+    
+    const imageContainer = document.getElementById("image-container");
+    const storedImages = sessionStorage.getItem("images");
+  
+    if (storedImages) {
+      const images = JSON.parse(storedImages);
+      /*images.forEach((imageData) => {
+        const img = document.createElement("img");
+        img.src = imageData;
+        img.alt = "Hochgeladenes Bild";
+        img.style.maxWidth = "200px";
+        img.style.margin = "10px";
+        imageContainer.appendChild(img);
+      });*/
+      const img = document.createElement("img");
+      img.src = images[randomNumber(images.length - 1)];
+      imageContainer.appendChild(img);
+    } else {
+      imageContainer.textContent = "Keine Bilder verfügbar.";
+    }
+  
+  
+  function randomNumber(max) {
+    return Math.floor(Math.random() * (max + 1));
+  }
+  
+
+  function askPermission() {
+    if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
+        DeviceMotionEvent.requestPermission();
+    }
+  }
+
+  let gyro = new Gyroscope({ frequency: 60 });
+
+  if (gyro != null) {
+     gyro.addEventListener("reading", e => {
+    console.log("yeah");
+    console.log("Angular velocity along the X-axis " + gyro.x);
+    console.log("Angular velocity along the Y-axis " + gyro.y);
+    console.log("Angular velocity along the Z-axis " + gyro.z);
+  });
+  gyro.start();
+  document.getElementById("gyro").innerHTML = "Gyroscope is supported.";
+  } else {
+    document.getElementById("gyro").innerHTML = "Gyroscope is not supported.";
+  }
+
+  if ("DeviceOrientationEvent" in window) {
+    window.addEventListener("deviceorientation", function(event) {
+      console.log("Alpha: " + event.alpha); // Drehung um die Z-Achse
+      console.log("Beta: " + event.beta);   // Drehung um die X-Achse
+      console.log("Gamma: " + event.gamma); // Drehung um die Y-Achse
+    });
+  } else {
+    console.log("Gyroskop ist nicht verfügbar.");
+  }
+  
+ 
