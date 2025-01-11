@@ -35,8 +35,12 @@
     askPermission();
     window.addEventListener('deviceorientation', (event) => {
       rotation_degrees = event.alpha;
+      document.getElementById("alpha").innerHTML = "Rotation: " + rotation_degrees;
       frontToBack_degrees = event.beta;
+      document.getElementById("beta").innerHTML = "Front to back: " + frontToBack_degrees;
       leftToRight_degrees = event.gamma;
+      document.getElementById("gamma").innerHTML = "Left to right: " + leftToRight_degrees;
+
       if (frontToBack_degrees > treshold) {
         document.getElementById("gyro").innerHTML = "Front to back: " + frontToBack_degrees;
       } else if (leftToRight_degrees > treshold) {
