@@ -1,7 +1,11 @@
     
     const imageContainer = document.getElementById("image-container");
     const storedImages = sessionStorage.getItem("images");
-    const treshold = 45; 
+    let movementActive = false;
+    const rightTreshold = 20; 
+    const wrongTreshold = -20;
+    const deadZoneOne = 75; 
+    const deadZoneTwo = -75;
   
     if (storedImages) {
       const images = JSON.parse(storedImages);
@@ -41,12 +45,16 @@
       leftToRight_degrees = event.gamma;
       document.getElementById("gamma").innerHTML = "Left to right: " + leftToRight_degrees;
 
-      if (frontToBack_degrees > treshold) {
-        document.getElementById("gyro").innerHTML = "Front to back: " + frontToBack_degrees;
-      } else if (leftToRight_degrees > treshold) {
-        document.getElementById("gyro").innerHTML = "Left to right: " + leftToRight_degrees;
-      } else {
-        document.getElementById("gyro").innerHTML = "No movement detected.";
+      if (!movementActive && leftToRight_degrees < rightTreshold && leftToRight_degrees > 0) {
+        document.getElementById("gyro").innerHTML = "Right";
+        movementActive = true;
+      } else if (!movementActive && leftToRight_degrees > wrongTreshold && leftToRight_degrees < 0) {
+        document.getElementById("gyro").innerHTML = "Wrong";
+        movementActive = true;
+      }
+
+      if (movementActive && (leftToRight_degrees > deadZoneOne || leftToRight_degrees < deadZoneTwo)) {
+        movementActive = false;
       }
     })
   }
