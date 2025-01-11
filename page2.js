@@ -36,7 +36,6 @@
   }
 
   function getGyro() {
-    askPermission();
     window.addEventListener('deviceorientation', (event) => {
       rotation_degrees = event.alpha;
       document.getElementById("alpha").innerHTML = "Rotation: " + rotation_degrees;
