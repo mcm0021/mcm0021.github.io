@@ -67,9 +67,9 @@
 
   function askPermission() {
         console.log("Permission requested.");
-    if (DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === "function") {
+    if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
   
-        DeviceOrientationEvent.requestPermission().then(response => {
+        DeviceMotionEvent.requestPermission().then(response => {
           if (response == 'granted') {
             getSensorData();
           }
