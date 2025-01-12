@@ -70,14 +70,14 @@
 
   function askPermission() {
         console.log("Permission requested.");
-    if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
+    //if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
   
         DeviceMotionEvent.requestPermission().then(response => {
           if (response == 'granted') {
             getSensorData();
           }
-        })
-    }
+        });
+    //}
   }
 
   function getSensorData() {
@@ -111,8 +111,7 @@
       if (movementActive && (leftToRight_degrees > deadZoneOne || leftToRight_degrees < deadZoneTwo)) {
         movementActive = false;
       }
-
-    })
+    });
   }
 
   function changeImage() {
