@@ -1,5 +1,6 @@
     
   const imageContainer = document.getElementById("image-container");
+  //imageContainer.remove();
   const storedImages = sessionStorage.getItem("images");
   let unusedImages;
   let usedImagesInOrder = [];
@@ -42,6 +43,7 @@
     });*/
     //const img = getRandomImage();
     //imageContainer.appendChild(img);
+    //document.getElementById("image-container").innerHTML = "";
     askPermission();
   } else {
     imageContainer.textContent = "Keine Bilder verfügbar.";
@@ -142,7 +144,10 @@
   }
   
   function start() {
-    let countDownOne = 7;
+    imageTimeStart = new Date().getTime();
+    const img = getRandomImage();
+    imageContainer.appendChild(img);
+    let countDownOne = time;
     const countDownElement = document.getElementById("countdown");
     countDownElement.innerHTML = countDownOne;
     const interval = setInterval(() => {
@@ -150,18 +155,15 @@
       countDownElement.innerHTML = countDownOne;
       if (countDownOne == 0) {
         countDownElement.innerHTML = "";
-        clearInterval(interval); 
-        imageTimeStart = new Date().getTime();
-        const img = getRandomImage();
-        imageContainer.appendChild(img);
-        countDown(time);
+        clearInterval(interval);
+        imageContainer.remove();
       }
     }, 1000);
    
   
   }
 
-  function countDown(seconds) {
+  /*function countDown(seconds) {
     let countDownTwo = seconds;
     const countDownElement = document.getElementById("countdown");
     countDownElement.innerHTML = countDownTwo;
@@ -173,6 +175,20 @@
         clearInterval(interval); 
       }
     }, 1000);
+  }*/
+
+  function showResults() {
+    imageContainer.remove();
+    const countDownElement = document.getElementById("countdown");
+    countDownElement.remove();
+    const resultElement = document.getElementById("results");
+    const resultText = document.createElement("p");
+    resultText.textContent = "Ergebnisse:";
+    resultElement.appendChild(resultText);
+    const correctAnswersElement = document.createElement("p");
+    correctAnswersElement.textContent = "Richtige Antworten: " + correctAnswers + " von " + totalImages;
+    resultElement.appendChild(correctAnswersElement);
+    const wrongAnswersElement = document.createElement("p");
   }
 
   
