@@ -26,6 +26,7 @@
   }
 
   if (storedImages) {
+    console.log("wird ausgeführt");
     unusedImages = JSON.parse(storedImages);
 
     /*images.forEach((imageData) => {
@@ -39,7 +40,6 @@
     //const img = getRandomImage();
     //imageContainer.appendChild("");
     askPermission();
-    getSensorData();
   } else {
     imageContainer.textContent = "Keine Bilder verfügbar.";
   }
@@ -65,9 +65,15 @@
     return Math.floor(Math.random() * (max + 1));
   }
 
-  function askPermission(){
+  function askPermission() {
+        console.log("Permission requested.");
     if (DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === "function") {
-        DeviceOrientationEvent.requestPermission();
+  
+        DeviceOrientationEvent.requestPermission().then(response => {
+          if (response == 'granted') {
+            getSensorData();
+          }
+        })
     }
   }
 
