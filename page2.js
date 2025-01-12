@@ -160,8 +160,8 @@
   
   }
 
-  function countDown(time) {
-    let countDown = time;
+  function countDown(seconds) {
+    let countDown = seconds;
     const countDownElement = document.getElementById("countdown");
     countDownElement.innerHTML = countDown;
     const interval = setInterval(() => {
