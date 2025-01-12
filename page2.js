@@ -68,14 +68,14 @@
 
   function askPermission() {
         //console.log("Permission requested.");
-    //if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
+    if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
   
         DeviceMotionEvent.requestPermission().then(response => {
           if (response == 'granted') {
             getSensorData();
           }
         });
-    //}
+    }
   }
 
   function getSensorData() {
