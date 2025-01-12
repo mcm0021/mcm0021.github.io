@@ -38,8 +38,8 @@
       img.style.margin = "10px";
       imageContainer.appendChild(img);
     });*/
-    const img = getRandomImage();
-    imageContainer.appendChild(img);
+    //const img = getRandomImage();
+    //imageContainer.appendChild(img);
     //askPermission();
   } else {
     imageContainer.textContent = "Keine Bilder verfügbar.";
@@ -67,7 +67,7 @@
   }
 
   function askPermission() {
-        console.log("Permission requested.");
+        //console.log("Permission requested.");
     //if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
   
         DeviceMotionEvent.requestPermission().then(response => {
