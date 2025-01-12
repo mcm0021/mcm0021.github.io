@@ -25,7 +25,6 @@
       console.log(folderCount); 
       const savedFolders = JSON.parse(localStorage.getItem('folders')) || [];
       savedFolders.forEach((folderData, index) => {
-        createFolder(false); // Ordner erstellen
         const folder = document.getElementById(`folder-${index + 1}`);
         const imagesContainer = folder.querySelector('.images');
         console.log("not yet");

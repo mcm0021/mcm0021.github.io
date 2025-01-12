@@ -15,8 +15,11 @@
   let wrongAnswers = 0;
   let correctAnswersInARow = 0;
   let streak = 0;
+  let timeForCorrectAnswersInARow = 0;
   let streakTime = 0;
+  let logestTimeForCorrectAnswer = 0; 
   let timeForCurrentImage = 0;
+  let imageTimeStart = 0;
 
   
   if (time) {
@@ -113,16 +116,20 @@
   }
 
   function changeImage() {
+    
     imageContainer.removeChild(imageContainer.firstChild);
     const img = getRandomImage();
     imageContainer.appendChild(img);
   }
 
   function rightAnswer() {
+    const time = new Date().now.getTime() - imageTimeStart;
     results.push(true);
     totalImages++;
     correctAnswers++;
     correctAnswersInARow++;
+    timeForCorrectAnswersInARow += time;
+    Math.max(logestTimeForCorrectAnswer, time);
   }
 
   function wrongAnswer() {
@@ -130,6 +137,7 @@
     totalImages++;
     wrongAnswers++;
     streak = Math.max(streak, correctAnswersInARow);
+    streakTime = Math.max(streakTime, timeForCorrectAnswersInARow);
     correctAnswersInARow = 0;
   }
   
@@ -137,6 +145,7 @@
     if (countDown(5)) {
       const img = getRandomImage();
       imageContainer.appendChild(img);
+      imageTimeStart = new Date().now.getTime();
       if (countDown(time)) {
         //showResults();
       }
