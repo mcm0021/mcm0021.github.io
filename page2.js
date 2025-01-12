@@ -38,9 +38,9 @@
       img.style.margin = "10px";
       imageContainer.appendChild(img);
     });*/
-    //const img = getRandomImage();
-    //imageContainer.appendChild("");
-    askPermission();
+    const img = getRandomImage();
+    imageContainer.appendChild(img);
+    //askPermission();
   } else {
     imageContainer.textContent = "Keine Bilder verfügbar.";
   }
@@ -120,7 +120,7 @@
   }
 
   function rightAnswer() {
-    const time = new Date().now.getTime() - imageTimeStart;
+    const time = new Date().getTime() - imageTimeStart;
     results.push(true);
     totalImages++;
     correctAnswers++;
@@ -138,18 +138,15 @@
     correctAnswersInARow = 0;
   }
   
-  function start() {
-    if (countDown(5)) {
-      const img = getRandomImage();
-      imageContainer.appendChild(img);
-      imageTimeStart = new Date().now.getTime();
-      if (countDown(time)) {
-        //showResults();
-      }
-    }
+  async function start() {
+    await countDown(3);
+    imageTimeStart = new Date().getTime();
+    const img = getRandomImage();
+    imageContainer.appendChild(img);
+    await countDown(time);
   }
 
-  function countDown(time) {
+  async function countDown(time) {
     let countDown = time;
     const countDownElement = document.getElementById("countdown");
     countDownElement.innerHTML = countDown;
@@ -158,8 +155,8 @@
       countDownElement.innerHTML = countDown;
       if (countDown == 0) {
         countDownElement.innerHTML = "";
-        clearInterval(interval);
-        return true; 
+        clearInterval(interval); 
+        resolve(true); 
       }
     }, 1000);
   }
