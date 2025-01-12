@@ -144,7 +144,6 @@
       countDown--;
       countDownElement.innerHTML = countDown;
       if (countDown == 0) {
-        getSensorData();
         const img = getRandomImage();
         imageContainer.appendChild(img);
         countDownElement.innerHTML = "";
