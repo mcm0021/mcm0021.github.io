@@ -83,6 +83,7 @@
   function getSensorData() {
     window.addEventListener('deviceorientation', (event) => {
       rotation_degrees = event.alpha;
+      document.getElementById("alpha").innerHTML = "permitted";
       //document.getElementById("alpha").innerHTML = "Rotation: " + rotation_degrees;
       frontToBack_degrees = event.beta;
       //document.getElementById("beta").innerHTML = "Front to back: " + frontToBack_degrees;
@@ -150,7 +151,7 @@
       if (countDown == 0) {
         countDownElement.innerHTML = "";
         clearInterval(interval); 
-         imageTimeStart = new Date().getTime();
+        imageTimeStart = new Date().getTime();
         const img = getRandomImage();
         imageContainer.appendChild(img);
         countDown(time);
