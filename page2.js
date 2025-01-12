@@ -40,7 +40,7 @@
     });*/
     //const img = getRandomImage();
     //imageContainer.appendChild(img);
-    //askPermission();
+    askPermission();
   } else {
     imageContainer.textContent = "Keine Bilder verfügbar.";
   }
@@ -138,15 +138,26 @@
     correctAnswersInARow = 0;
   }
   
-  async function start() {
-    await countDown(3);
-    imageTimeStart = new Date().getTime();
-    const img = getRandomImage();
-    imageContainer.appendChild(img);
-    await countDown(time);
+  function start() {
+    let countDown = 7;
+    const countDownElement = document.getElementById("countdown");
+    countDownElement.innerHTML = countDown;
+    const interval = setInterval(() => {
+      countDown--;
+      countDownElement.innerHTML = countDown;
+      if (countDown == 0) {
+        countDownElement.innerHTML = "";
+        clearInterval(interval); 
+         imageTimeStart = new Date().getTime();
+        const img = getRandomImage();
+        imageContainer.appendChild(img);
+      }
+    }, 1000);
+   
+    countDown(time);
   }
 
-  async function countDown(time) {
+  function countDown(time) {
     let countDown = time;
     const countDownElement = document.getElementById("countdown");
     countDownElement.innerHTML = countDown;
@@ -156,7 +167,6 @@
       if (countDown == 0) {
         countDownElement.innerHTML = "";
         clearInterval(interval); 
-        resolve(true); 
       }
     }, 1000);
   }
