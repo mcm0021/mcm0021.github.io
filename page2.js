@@ -1,42 +1,48 @@
     
-    const imageContainer = document.getElementById("image-container");
-    const storedImages = sessionStorage.getItem("images");
-    let unusedImages;
-    let usedImagesInOrder = [];
-    let movementActive = false;
-    const rightTreshold = 20; 
-    const wrongTreshold = -20;
-    const deadZoneOne = 75; 
-    const deadZoneTwo = -75;
-    let results = [];
-    const time = sessionStorage.getItem("time"); 
-    let totalImages = 0;
-    let correctAnswers = 0;
-    let wrongAnswers = 0;
-    let correctAnswersInARow = 0;
-    let streak = 0;
-    let streakTime = 0;
-    let timeForCurrentImage = 0;
+  const imageContainer = document.getElementById("image-container");
+  const storedImages = sessionStorage.getItem("images");
+  let unusedImages;
+  let usedImagesInOrder = [];
+  let movementActive = false;
+  const rightTreshold = 20; 
+  const wrongTreshold = -20;
+  const deadZoneOne = 75; 
+  const deadZoneTwo = -75;
+  let results = [];
+  let time = sessionStorage.getItem("time"); 
+  let totalImages = 0;
+  let correctAnswers = 0;
+  let wrongAnswers = 0;
+  let correctAnswersInARow = 0;
+  let streak = 0;
+  let streakTime = 0;
+  let timeForCurrentImage = 0;
 
   
-    if (storedImages) {
-      unusedImages = JSON.parse(storedImages);
+  if (time) {
+    countDown(time);
+  } else {
+    time = 120; 
+  }
 
-      /*images.forEach((imageData) => {
-        const img = document.createElement("img");
-        img.src = imageData;
-        img.alt = "Hochgeladenes Bild";
-        img.style.maxWidth = "200px";
-        img.style.margin = "10px";
-        imageContainer.appendChild(img);
-      });*/
-      //const img = getRandomImage();
-      //imageContainer.appendChild("");
-      askPermission();
-      getSensorData();
-    } else {
-      imageContainer.textContent = "Keine Bilder verfügbar.";
-    }
+  if (storedImages) {
+    unusedImages = JSON.parse(storedImages);
+
+    /*images.forEach((imageData) => {
+      const img = document.createElement("img");
+      img.src = imageData;
+      img.alt = "Hochgeladenes Bild";
+      img.style.maxWidth = "200px";
+      img.style.margin = "10px";
+      imageContainer.appendChild(img);
+    });*/
+    //const img = getRandomImage();
+    //imageContainer.appendChild("");
+    askPermission();
+    getSensorData();
+  } else {
+    imageContainer.textContent = "Keine Bilder verfügbar.";
+  }
   
 
   function getRandomImage() {
@@ -148,6 +154,7 @@
         imageContainer.appendChild(img);
         countDownElement.innerHTML = "";
         clearInterval(interval);
+        countDown(time);
       }
     }, 1000);
   }

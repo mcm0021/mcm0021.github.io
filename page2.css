@@ -1,5 +1,68 @@
 body {
     display: flex;
+    flex-direction: column; /* Elemente untereinander anordnen */
+    align-items: center; /* Zentriert die Elemente horizontal */
+    justify-content: flex-start; /* Beginnt von oben */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    margin: 20px 0;
+  }
+  
+  #image-container {
+    width: 90%; /* Breite auf 90% des Bildschirms setzen */
+    max-width: 600px; /* Maximalbreite */
+    aspect-ratio: 16 / 9; /* Seitenverhältnis festlegen */
+    background-color: #f0f0f0; /* Heller Hintergrund für besseren Kontrast */
+    display: flex;
+    align-items: center; /* Bild vertikal zentrieren */
+    justify-content: center; /* Bild horizontal zentrieren */
+    overflow: hidden; /* Überstehende Inhalte ausblenden */
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+  
+  #image-container img {
+    max-width: 100%; /* Bild passt sich an die Breite an */
+    max-height: 100%; /* Bild passt sich an die Höhe an */
+    object-fit: contain; /* Bild vollständig anzeigen, Seitenverhältnis beibehalten */
+  }
+  
+  p, button, a, #gyroOut, #gyro, #alpha, #beta, #gamma {
+    margin: 10px 0; /* Abstand zwischen den Elementen */
+    text-align: center;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+
+/*first css
+body {
+    display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -11,7 +74,7 @@ body {
     height: 100px;
     width: 100px;
     object-fit: cover;
-}*/
+}
 
 #image-container {
     position: fixed;
@@ -44,4 +107,4 @@ body {
     font-size: 20px;
     font-weight: bold;
     z-index: 9999;
-}
+}*/
