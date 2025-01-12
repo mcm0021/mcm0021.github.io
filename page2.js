@@ -32,7 +32,8 @@
       });*/
       //const img = getRandomImage();
       //imageContainer.appendChild("");
-      startThreeSecondsCountDown();
+      askPermission();
+      getSensorData();
     } else {
       imageContainer.textContent = "Keine Bilder verfügbar.";
     }
@@ -64,7 +65,7 @@
     }
   }
 
-  function getGyro() {
+  function getSensorData() {
     window.addEventListener('deviceorientation', (event) => {
       rotation_degrees = event.alpha;
       //document.getElementById("alpha").innerHTML = "Rotation: " + rotation_degrees;
@@ -143,7 +144,7 @@
       countDown--;
       countDownElement.innerHTML = countDown;
       if (countDown == 0) {
-        getGyro();
+        getSensorData();
         const img = getRandomImage();
         imageContainer.appendChild(img);
         countDownElement.innerHTML = "";
