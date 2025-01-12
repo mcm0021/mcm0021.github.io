@@ -74,16 +74,16 @@
   function getSensorData() {
     window.addEventListener('deviceorientation', (event) => {
       rotation_degrees = event.alpha;
-      //document.getElementById("alpha").innerHTML = "Rotation: " + rotation_degrees;
+      document.getElementById("alpha").innerHTML = "Rotation: " + rotation_degrees;
       frontToBack_degrees = event.beta;
-      //document.getElementById("beta").innerHTML = "Front to back: " + frontToBack_degrees;
+      document.getElementById("beta").innerHTML = "Front to back: " + frontToBack_degrees;
       leftToRight_degrees = event.gamma;
-      //document.getElementById("gamma").innerHTML = "Left to right: " + leftToRight_degrees;
+      document.getElementById("gamma").innerHTML = "Left to right: " + leftToRight_degrees;
 
       if (rotation_degrees == null || frontToBack_degrees == null || leftToRight_degrees == null) {
         imageContainer.textContent = "Keine Sensor Daten erkannt.";
       } else {
-        startThreeSecondsCountDown();
+        start();
       }
     
 
@@ -126,6 +126,16 @@
     streak = Math.max(streak, correctAnswersInARow);
     correctAnswersInARow = 0;
   }
+  
+  function start() {
+    if (countDown(5)) {
+      const img = getRandomImage();
+      imageContainer.appendChild(img);
+      if (countDown(time)) {
+        //showResults();
+      }
+    }
+  }
 
   function countDown(time) {
     let countDown = time;
@@ -137,7 +147,7 @@
       if (countDown == 0) {
         countDownElement.innerHTML = "";
         clearInterval(interval);
-        //showResults();
+        return true; 
       }
     }, 1000);
   }
@@ -150,11 +160,9 @@
       countDown--;
       countDownElement.innerHTML = countDown;
       if (countDown == 0) {
-        const img = getRandomImage();
-        imageContainer.appendChild(img);
         countDownElement.innerHTML = "";
         clearInterval(interval);
-        countDown(time);
+        
       }
     }, 1000);
   }
