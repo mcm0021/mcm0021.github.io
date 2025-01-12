@@ -142,13 +142,13 @@
   }
   
   function start() {
-    let countDown = 7;
+    let countDownOne = 7;
     const countDownElement = document.getElementById("countdown");
-    countDownElement.innerHTML = countDown;
+    countDownElement.innerHTML = countDownOne;
     const interval = setInterval(() => {
-      countDown--;
-      countDownElement.innerHTML = countDown;
-      if (countDown == 0) {
+      countDownOne--;
+      countDownElement.innerHTML = countDownOne;
+      if (countDownOne == 0) {
         countDownElement.innerHTML = "";
         clearInterval(interval); 
         imageTimeStart = new Date().getTime();
@@ -162,101 +162,17 @@
   }
 
   function countDown(seconds) {
-    let countDown = seconds;
+    let countDownTwo = seconds;
     const countDownElement = document.getElementById("countdown");
-    countDownElement.innerHTML = countDown;
+    countDownElement.innerHTML = countDownTwo;
     const interval = setInterval(() => {
-      countDown--;
-      countDownElement.innerHTML = countDown;
-      if (countDown == 0) {
+      countDownTwo--;
+      countDownElement.innerHTML = countDownTwo;
+      if (countDownTwo == 0) {
         countDownElement.innerHTML = "";
         clearInterval(interval); 
       }
     }, 1000);
   }
 
-  function startThreeSecondsCountDown() {
-    let countDown = 5;
-    const countDownElement = document.getElementById("countdown");
-    countDownElement.innerHTML = countDown;
-    const interval = setInterval(() => {
-      countDown--;
-      countDownElement.innerHTML = countDown;
-      if (countDown == 0) {
-        countDownElement.innerHTML = "";
-        clearInterval(interval);
-        
-      }
-    }, 1000);
-  }
-
-
-
-  /*function getGyro() {
-    DeviceOrientationEvent.requestPermission().then(response => {
-      if (response == 'granted') {
-        window.addEventListener('deviceorientation', (event) => {
-          rotation_degrees = event.alpha;
-          frontToBack_degrees = event.beta;
-          leftToRight_degrees = event.gamma;
-          if (frontToBack_degrees > treshold) {
-            document.getElementById("gyro").innerHTML = "Front to back: " + frontToBack_degrees;
-          } else if (leftToRight_degrees > treshold) {
-            document.getElementById("gyro").innerHTML = "Left to right: " + leftToRight_degrees;
-          } else {
-            document.getElementById("gyro").innerHTML = "No movement detected.";
-          }
-        })
-      }
-    })
-  }
   
-  function getGyro() {
-    DeviceOrientationEvent.requestPermission().then(response => {
-      if (response == 'granted') {
-        let gyro = new Gyroscope({ frequency: 60 });
-        gyro.addEventListener("reading", e => {
-          document.getElementById("gyro").innerHTML = "Angular velocity along the X-axis " + gyro.x; 
-        });
-        gyro.start();
-        document.getElementById("gyro").innerHTML = "Gyroscope is supported.";
-      } else {
-        document.getElementById("gyro").innerHTML = "Gyroscope permission denied.";
-      }
-    });
-  }
-
-  function askPermission() {
-    if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
-        DeviceMotionEvent.requestPermission();
-    }
-  }
-
-
-
-  let gyro = new Gyroscope({ frequency: 60 });
-
-  if (gyro != null) {
-     gyro.addEventListener("reading", e => {
-    console.log("yeah");
-    console.log("Angular velocity along the X-axis " + gyro.x);
-    console.log("Angular velocity along the Y-axis " + gyro.y);
-    console.log("Angular velocity along the Z-axis " + gyro.z);
-  });
-  gyro.start();
-  document.getElementById("gyro").innerHTML = "Gyroscope is supported.";
-  } else {
-    document.getElementById("gyro").innerHTML = "Gyroscope is not supported.";
-  }
-
-  if ("DeviceOrientationEvent" in window) {
-    window.addEventListener("deviceorientation", function(event) {
-      console.log("Alpha: " + event.alpha); // Drehung um die Z-Achse
-      console.log("Beta: " + event.beta);   // Drehung um die X-Achse
-      console.log("Gamma: " + event.gamma); // Drehung um die Y-Achse
-    });
-  } else {
-    console.log("Gyroskop ist nicht verfügbar.");
-  }*/
-  
- 
