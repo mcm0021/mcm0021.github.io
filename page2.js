@@ -1,14 +1,27 @@
     
     const imageContainer = document.getElementById("image-container");
     const storedImages = sessionStorage.getItem("images");
+    let unusedImages;
+    let usedImagesInOrder = [];
     let movementActive = false;
     const rightTreshold = 20; 
     const wrongTreshold = -20;
     const deadZoneOne = 75; 
     const deadZoneTwo = -75;
+    let results = [];
+    const time = sessionStorage.getItem("time"); 
+    let totalImages = 0;
+    let correctAnswers = 0;
+    let wrongAnswers = 0;
+    let correctAnswersInARow = 0;
+    let streak = 0;
+    let streakTime = 0;
+    let timeForCurrentImage = 0;
+
   
     if (storedImages) {
-      const images = JSON.parse(storedImages);
+      unusedImages = JSON.parse(storedImages);
+
       /*images.forEach((imageData) => {
         const img = document.createElement("img");
         img.src = imageData;
@@ -17,13 +30,29 @@
         img.style.margin = "10px";
         imageContainer.appendChild(img);
       });*/
-      const img = document.createElement("img");
-      img.src = images[randomNumber(images.length - 1)];
-      imageContainer.appendChild(img);
+      //const img = getRandomImage();
+      //imageContainer.appendChild("");
+      startThreeSecondsCountDown();
     } else {
       imageContainer.textContent = "Keine Bilder verfügbar.";
     }
   
+
+  function getRandomImage() {
+    if (unusedImages.length > 0 && usedImagesInOrder.length < unusedImages.length) {
+      const images = unusedImages;
+      const img = document.createElement("img");
+      let randomImage;
+      do {
+        randomImage = images[randomNumber(images.length - 1)]
+      } while (usedImagesInOrder.includes(randomImage));
+      img.src = randomImage
+      usedImagesInOrder.push(randomImage);
+      return img; 
+    } else {
+      return "Keine Bilder verfügbar.";
+    }    
+  }
   
   function randomNumber(max) {
     return Math.floor(Math.random() * (max + 1));
@@ -38,25 +67,92 @@
   function getGyro() {
     window.addEventListener('deviceorientation', (event) => {
       rotation_degrees = event.alpha;
-      document.getElementById("alpha").innerHTML = "Rotation: " + rotation_degrees;
+      //document.getElementById("alpha").innerHTML = "Rotation: " + rotation_degrees;
       frontToBack_degrees = event.beta;
-      document.getElementById("beta").innerHTML = "Front to back: " + frontToBack_degrees;
+      //document.getElementById("beta").innerHTML = "Front to back: " + frontToBack_degrees;
       leftToRight_degrees = event.gamma;
-      document.getElementById("gamma").innerHTML = "Left to right: " + leftToRight_degrees;
+      //document.getElementById("gamma").innerHTML = "Left to right: " + leftToRight_degrees;
+
+      if (rotation_degrees == null || frontToBack_degrees == null || leftToRight_degrees == null) {
+        imageContainer.textContent = "Keine Sensor Daten erkannt.";
+      } else {
+        startThreeSecondsCountDown();
+      }
+    
 
       if (!movementActive && leftToRight_degrees < rightTreshold && leftToRight_degrees > 0) {
+        movementActive = true;
         document.getElementById("gyro").innerHTML = "Right";
-        movementActive = true;
+        rightAnswer();
+        changeImage();
       } else if (!movementActive && leftToRight_degrees > wrongTreshold && leftToRight_degrees < 0) {
-        document.getElementById("gyro").innerHTML = "Wrong";
         movementActive = true;
+        document.getElementById("gyro").innerHTML = "Wrong";
+        wrongAnswer();
+        changeImage();
       }
 
       if (movementActive && (leftToRight_degrees > deadZoneOne || leftToRight_degrees < deadZoneTwo)) {
         movementActive = false;
       }
+
     })
   }
+
+  function changeImage() {
+    imageContainer.removeChild(imageContainer.firstChild);
+    const img = getRandomImage();
+    imageContainer.appendChild(img);
+  }
+
+  function rightAnswer() {
+    results.push(true);
+    totalImages++;
+    correctAnswers++;
+    correctAnswersInARow++;
+  }
+
+  function wrongAnswer() {
+    results.push(false);
+    totalImages++;
+    wrongAnswers++;
+    streak = Math.max(streak, correctAnswersInARow);
+    correctAnswersInARow = 0;
+  }
+
+  function countDown(time) {
+    let countDown = time;
+    const countDownElement = document.getElementById("countdown");
+    countDownElement.innerHTML = countDown;
+    const interval = setInterval(() => {
+      countDown--;
+      countDownElement.innerHTML = countDown;
+      if (countDown == 0) {
+        countDownElement.innerHTML = "";
+        clearInterval(interval);
+        //showResults();
+      }
+    }, 1000);
+  }
+
+  function startThreeSecondsCountDown() {
+    let countDown = 5;
+    const countDownElement = document.getElementById("countdown");
+    countDownElement.innerHTML = countDown;
+    const interval = setInterval(() => {
+      countDown--;
+      countDownElement.innerHTML = countDown;
+      if (countDown == 0) {
+        getGyro();
+        const img = getRandomImage();
+        imageContainer.appendChild(img);
+        countDownElement.innerHTML = "";
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
+
+
 
   /*function getGyro() {
     DeviceOrientationEvent.requestPermission().then(response => {
