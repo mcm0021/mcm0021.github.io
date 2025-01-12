@@ -22,10 +22,8 @@
   let imageTimeStart = 0;
 
   
-  if (time) {
-    countDown(time);
-  } else {
-    time = 120; 
+  if (!time) {
+    time = 120;
   }
 
   if (storedImages) {
