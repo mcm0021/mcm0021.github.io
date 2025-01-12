@@ -26,6 +26,8 @@
     time = 120;
   }
 
+  //getSensorData();
+
   if (storedImages) {
     console.log("wird ausgeführt");
     unusedImages = JSON.parse(storedImages);
@@ -151,10 +153,11 @@
          imageTimeStart = new Date().getTime();
         const img = getRandomImage();
         imageContainer.appendChild(img);
+        countDown(time);
       }
     }, 1000);
    
-    countDown(time);
+  
   }
 
   function countDown(time) {
