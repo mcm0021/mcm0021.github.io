@@ -127,7 +127,9 @@
     totalImages++;
     wrongAnswers++;
     streak = Math.max(streak, correctAnswersInARow);
+    streak = 0; 
     streakTime = Math.max(streakTime, timeForCorrectAnswersInARow);
+    streakTime = 0;
     correctAnswersInARow = 0;
   }
   

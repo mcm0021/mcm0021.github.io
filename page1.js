@@ -64,9 +64,15 @@
       folderElement.className = 'folder';
       folderElement.id = `folder-${folderCount}`;
       folderElement.innerHTML = `
-        <input class="file" id="${folderElement.id}" type="text" id="name" placeholder="New Folder">
+        <input id="text" type="text" placeholder="New Folder">
         <i class="fa fa-trash-o" onclick="deleteFolder('${folderElement.id}')"></i>
-        <input class"file" type="file" multiple accept="image/*" onchange="uploadImages(event, '${folderElement.id}')">
+        <label>
+          Add Images
+        <input class="file" type="file" multiple accept="image/*" onchange="uploadImages(event, '${folderElement.id}')">
+        </label>
+        <div id="${folderElement.id}" >
+          Choose Folder
+        </div>
         <div class="images"></div>`;
 
       folderElement.querySelector(`#${folderElement.id}`).addEventListener('click', () => toggleImages(folderElement.id));

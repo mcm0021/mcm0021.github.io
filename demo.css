@@ -16,58 +16,30 @@
 
   #next-button, #new-folder {
     padding: 3em;
+    font-size: 1.5em; 
   }
 
   #folderContainer {
     border-radius: 25px;
     padding: 20px;
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex-flow: column;
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   }
 
-  .folder {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
-    gap: 10px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-  }
-
-  .file {
+  #text {
+    align-self: center;
     width: 90%;
-    font-size: 1em;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  .fa-trash-o {
-    font-size: 1.5em; 
-    color: #e73c7e; 
-    cursor: pointer; 
-    margin-top: 10px;
-  }
-
-  .images {
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 10px; 
-    justify-content: center; 
+    font-size: 2.5em;
+    padding: 0.5em;
   }
 
   .image {
     width: 100px;
     height: 100px;
     object-fit: cover;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    margin: 5px;
+    flex-wrap: wrap;
   }
 }
 @media (min-device-width: 561px) {
@@ -112,9 +84,6 @@
     background-color: #f9f9f9;
   }
 
-  .folder h3 {
-    margin: 0 0 10px;
-  }
   .image {
     width: 100px;
     height: 100px;
@@ -123,45 +92,6 @@
   }
 
 }
-
-
-
-
-  
-/*#folder-container {
-  border-radius: 20px;
-  padding: 10px;
-  display: flex; 
-  flex-direction: column;
-  align-items: flex-start;
-  border-radius: 10px;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-}
-
-*#folderContainer {
-    border-radius: 20px;
-    padding: 10px;
-    display: flex;
-    flex-flow: column;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  }
-
-  folder {
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-  }
-
-  .folder h3 {
-    margin: 0 0 10px;
-  }
-  .image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin: 5px;
-  }*/
 
 
 body {
@@ -198,6 +128,7 @@ h1, h2 {
   color: black;
   font-size: 2em;
 }
+
 input {
   border-radius: 10px;
   margin: 1px;
@@ -218,41 +149,18 @@ button {
   padding: 0.5em;
 }
 
-
-/*#folderContainer {
-    margin: 20px;
-  }
-  .folder {
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-  }
-  .folder h3 {
-    margin: 0 0 10px;
-  }
-  .image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin: 5px;
-  }
-
-  body {
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
-	height: 100vh;
-}*/
-
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+label, div {
+  border-radius: 25px;
+  margin: 5px;
+  text-align: center; 
+  border: 0px;
+  color: black;
+  font-size: 1em;
+  padding: 0.5em;
+  font-family: Arial;
 }
+
+.file {
+  display: none;
+}
+
