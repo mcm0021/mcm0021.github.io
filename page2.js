@@ -136,6 +136,9 @@
   }
   
   function start() {
+    
+    askPermission();
+    
     imageTimeStart = new Date().getTime();
     const img = getRandomImage();
     imageContainer.appendChild(img);
