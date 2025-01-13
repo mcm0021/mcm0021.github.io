@@ -66,7 +66,6 @@
         DeviceMotionEvent.requestPermission().then(response => {
           if (response == 'granted') {
             getSensorData();
-          } else {
           }
         });
     } else {
