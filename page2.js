@@ -95,12 +95,12 @@
 
       if (!movementActive && leftToRight_degrees < rightTreshold && leftToRight_degrees > 0) {
         movementActive = true;
-        document.getElementById("gyro").innerHTML = "Right";
+        //document.getElementById("gyro").innerHTML = "Right";
         rightAnswer();
         changeImage();
       } else if (!movementActive && leftToRight_degrees > wrongTreshold && leftToRight_degrees < 0) {
         movementActive = true;
-        document.getElementById("gyro").innerHTML = "Wrong";
+        //document.getElementById("gyro").innerHTML = "Wrong";
         wrongAnswer();
         changeImage();
       }
