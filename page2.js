@@ -118,7 +118,8 @@
   }
 
   function rightAnswer() {
-    const time = new Date().getTime() - imageTimeStart;
+    const time = (new Date().getTime() - imageTimeStart) / 1000;
+    imageTimeStart = new Date().getTime();
     results.push(true);
     totalImages++;
     correctAnswers++;
