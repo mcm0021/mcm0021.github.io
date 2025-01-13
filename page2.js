@@ -61,15 +61,12 @@
   }
 
   function askPermission() {
-        //console.log("Permission requested.");
+
     if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
-  
         DeviceMotionEvent.requestPermission().then(response => {
           if (response == 'granted') {
             getSensorData();
-            document.getElementById("alpha").innerHTML = "permitted";
           } else {
-            document.getElementById("alpha").innerHTML = "not permitted";
           }
         });
     } else {
