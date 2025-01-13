@@ -1,21 +1,7 @@
-  document.addEventListener("DOMContentLoaded", () => {
-    const fileInput = document.getElementById("file-input");
-    const nextButton = document.getElementById("next-button");
   
-    // Speichert die hochgeladenen Bilder
-    const uploadedImages = [];
-  
-    fileInput.addEventListener("change", (event) => {
-      const files = event.target.files;
-      Array.from(files).forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          uploadedImages.push(reader.result); // Base64-Daten speichern
-          //console.log("Bild hochgeladen:", reader.result);
-        };
-        reader.readAsDataURL(file); // Bild in Base64 konvertieren
-      });
-    });
+
+  const nextButton = document.getElementById("next-button");
+  const uploadedImages = [];
   
     nextButton.addEventListener("click", () => {
 
@@ -25,7 +11,7 @@
       console.log(folderCount); 
       const savedFolders = JSON.parse(localStorage.getItem('folders')) || [];
       savedFolders.forEach((folderData, index) => {
-        
+
         const folder = document.getElementById(`folder-${index + 1}`);
         const imagesContainer = folder.querySelector('.images');
         console.log("not yet");
@@ -49,7 +35,6 @@
       sessionStorage.setItem("images", JSON.stringify(uploadedImages));
       window.location.href = "page2.html"; // Zur zweiten Seite navigieren
     });
-  });
 
   class folder {
     constructor(name, images, id, onDisplay) {

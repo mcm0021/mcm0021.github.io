@@ -25,7 +25,7 @@
   let fastestTime = Infinity;
 
   
-  if (!time) {
+  if (!time || time < 0) {
     time = 120;
   }
 

@@ -1,23 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bilder hochladen</title>
+  <title>Picture guessing Game</title>
   <link rel="stylesheet" href="demo.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
-  <h1>Bilder hochladen</h1>
-  <input type="file" id="file-input" multiple accept="image/*">
-  <div>
-    <h2>Ordner</h2>
-    <button onclick="createFolder()">Neuen Ordner erstellen</button>
-    <div id="folderContainer"></div>
+
+  <div id="menu">
+    <h1>Picture guessing Game</h1>
+    <p>Willkommen zum Picture guessing Game. Lade Bilder hoch und lass deine Freunde raten, was auf den Bildern zu sehen ist.</p>
+    <input type="number" id="seconds" placeholder="Zeit" step="1">
+    <button id="new-folder" onclick="createFolder()">Neuen Ordner erstellen</button>
+    <button id="next-button">Zur game Seite</button>
   </div>
 
-  <button id="next-button">Zur nächsten Seite</button>
-  <input type="number" id="seconds" placeholder="Zeit" step="1">
+  <div id="folderMenu">
+    
+    <div id="folderContainer">
+      <h2>Folder</h2>
+    </div>
+
+
+  
+
   <script src="page1.js"></script>
 </body>
 </html>
