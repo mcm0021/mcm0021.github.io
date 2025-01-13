@@ -1,4 +1,4 @@
-@media (max-device-width: 450) {
+@media (max-device-width: 560) {
   #menu {
     border-radius: 25px;
     padding: 20px;
@@ -55,7 +55,12 @@
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 }
 
-
+.folder {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
 
 .folder h3 {
   margin: 0 0 10px;
