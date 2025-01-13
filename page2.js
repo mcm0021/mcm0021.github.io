@@ -121,11 +121,13 @@
     const time = (new Date().getTime() - imageTimeStart) / 1000;
     imageTimeStart = new Date().getTime();
     results.push(true);
+    streak++, 
+    streakTime += time;
     totalImages++;
     correctAnswers++;
     correctAnswersInARow++;
     timeForCorrectAnswersInARow += time;
-    Math.max(logestTimeForCorrectAnswer, time);
+    logestTimeForCorrectAnswer = Math.max(logestTimeForCorrectAnswer, time);
     totalTimeCorrectAnswers += time;
     fastestTime = Math.min(fastestTime, time);
   }
@@ -182,16 +184,16 @@
     correctAnswersDiv.innerHTML = correctAnswers + " von " + totalImages + " richtig";
     resultElement.appendChild(correctAnswersDiv);
     var streakDiv = document.createElement("div");
-    streakDiv.innerHTML = "Längste Serie: " + streak + " in " + streakTime + "ms";
+    streakDiv.innerHTML = "Längste Serie: " + streak + " in " + streakTime + "s";
     resultElement.appendChild(streakDiv);
     var longestTimeDiv = document.createElement("div");
-    longestTimeDiv.innerHTML = "Längste Zeit für eine richtige Antwort: " + logestTimeForCorrectAnswer + "ms";
+    longestTimeDiv.innerHTML = "Längste Zeit für eine richtige Antwort: " + logestTimeForCorrectAnswer + "s";
     resultElement.appendChild(longestTimeDiv);
     var fastestTimeDiv = document.createElement("div");
-    fastestTimeDiv.innerHTML = "Schnellste Zeit für eine richtige Antwort: " + fastestTime + "ms";
+    fastestTimeDiv.innerHTML = "Schnellste Zeit für eine richtige Antwort: " + fastestTime + "s";
     resultElement.appendChild(fastestTimeDiv);
     var averageTimeDiv = document.createElement("div");
-    averageTimeDiv.innerHTML = "Durchschnittliche Zeit für eine richtige Antwort: " + totalTimeCorrectAnswers / correctAnswers + "ms";
+    averageTimeDiv.innerHTML = "Durchschnittliche Zeit für eine richtige Antwort: " + totalTimeCorrectAnswers / correctAnswers + "s";
     resultElement.appendChild(averageTimeDiv);
     for (let i = 0; i < results.length; i++) {
       var result = document.createElement("div"); 
