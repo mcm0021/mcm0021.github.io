@@ -39,6 +39,15 @@
     object-fit: cover;
     margin: 5px;
   }
+
+  .file {
+    align-self: center;
+    width: 90%;
+    font-size: 2.5em;
+    padding: 3em;
+  }
+
+  
 }
 @media (min-device-width: 561px) {
   #menu {
