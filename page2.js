@@ -27,27 +27,15 @@
     time = 120;
   }
 
-  //getSensorData();
 
   if (storedImages) {
     console.log("wird ausgeführt");
     unusedImages = JSON.parse(storedImages);
-
-    /*images.forEach((imageData) => {
-      const img = document.createElement("img");
-      img.src = imageData;
-      img.alt = "Hochgeladenes Bild";
-      img.style.maxWidth = "200px";
-      img.style.margin = "10px";
-      imageContainer.appendChild(img);
-    });*/
-    //const img = getRandomImage();
-    //imageContainer.appendChild(img);
-    //document.getElementById("image-container").innerHTML = "";
-    askPermission();
   } else {
     imageContainer.textContent = "Keine Bilder verfügbar.";
   }
+
+  start();  
   
 
   function getRandomImage() {
@@ -77,15 +65,21 @@
         DeviceMotionEvent.requestPermission().then(response => {
           if (response == 'granted') {
             getSensorData();
+            document.getElementById("alpha").innerHTML = "permitted";
+          } else {
+            document.getElementById("alpha").innerHTML = "not permitted";
           }
         });
+    } else {
+      getSensorData();
     }
   }
 
   function getSensorData() {
+
     window.addEventListener('deviceorientation', (event) => {
       rotation_degrees = event.alpha;
-      document.getElementById("alpha").innerHTML = "permitted";
+      //document.getElementById("alpha").innerHTML = "permitted";
       //document.getElementById("alpha").innerHTML = "Rotation: " + rotation_degrees;
       frontToBack_degrees = event.beta;
       //document.getElementById("beta").innerHTML = "Front to back: " + frontToBack_degrees;
@@ -94,8 +88,6 @@
 
       if (rotation_degrees == null || frontToBack_degrees == null || leftToRight_degrees == null) {
         imageContainer.textContent = "Keine Sensor Daten erkannt.";
-      } else {
-        start();
       }
     
 
@@ -119,7 +111,7 @@
 
   function changeImage() {
     
-    imageContainer.removeChild(imageContainer.firstChild);
+    imageContainer.innerHTML = "";
     const img = getRandomImage();
     imageContainer.appendChild(img);
   }
@@ -159,8 +151,6 @@
         imageContainer.remove();
       }
     }, 1000);
-   
-  
   }
 
   /*function countDown(seconds) {
