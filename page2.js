@@ -36,8 +36,9 @@
     imageContainer.textContent = "Keine Bilder verfügbar.";
   }
 
-  start();  
-  
+  document.addEventListener("DOMContentLoaded", () => {
+    start();  
+  });
 
   function getRandomImage() {
     if (unusedImages.length > 0 && usedImagesInOrder.length < unusedImages.length) {
@@ -152,7 +153,6 @@
       if (countDownOne == 0) {
         countDownElement.innerHTML = "";
         clearInterval(interval);
-        imageContainer.remove();
         showResults();
       }
     }, 1000);
