@@ -1,6 +1,5 @@
     
   const imageContainer = document.getElementById("image-container");
-  //imageContainer.remove();
   const storedImages = sessionStorage.getItem("images");
   let unusedImages;
   let usedImagesInOrder = [];
@@ -76,13 +75,10 @@
   function getSensorData() {
 
     window.addEventListener('deviceorientation', (event) => {
+
       rotation_degrees = event.alpha;
-      //document.getElementById("alpha").innerHTML = "permitted";
-      //document.getElementById("alpha").innerHTML = "Rotation: " + rotation_degrees;
       frontToBack_degrees = event.beta;
-      //document.getElementById("beta").innerHTML = "Front to back: " + frontToBack_degrees;
       leftToRight_degrees = event.gamma;
-      //document.getElementById("gamma").innerHTML = "Left to right: " + leftToRight_degrees;
 
       if (rotation_degrees == null || frontToBack_degrees == null || leftToRight_degrees == null) {
         imageContainer.textContent = "Keine Sensor Daten erkannt.";
@@ -91,12 +87,10 @@
 
       if (!movementActive && leftToRight_degrees < rightTreshold && leftToRight_degrees > 0) {
         movementActive = true;
-        //document.getElementById("gyro").innerHTML = "Right";
         rightAnswer();
         changeImage();
       } else if (!movementActive && leftToRight_degrees > wrongTreshold && leftToRight_degrees < 0) {
         movementActive = true;
-        //document.getElementById("gyro").innerHTML = "Wrong";
         wrongAnswer();
         changeImage();
       }
@@ -157,20 +151,6 @@
       }
     }, 1000);
   }
-
-  /*function countDown(seconds) {
-    let countDownTwo = seconds;
-    const countDownElement = document.getElementById("countdown");
-    countDownElement.innerHTML = countDownTwo;
-    const interval = setInterval(() => {
-      countDownTwo--;
-      countDownElement.innerHTML = countDownTwo;
-      if (countDownTwo == 0) {
-        countDownElement.innerHTML = "";
-        clearInterval(interval); 
-      }
-    }, 1000);
-  }*/
 
   function showResults() {
     imageContainer.remove();
