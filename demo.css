@@ -1,5 +1,4 @@
-@media (max-device-width: 560px
-) {
+@media (max-device-width: 560px) {
   #menu {
     border-radius: 25px;
     padding: 20px;
@@ -18,8 +17,29 @@
   #next-button, #new-folder {
     padding: 3em;
   }
-}
 
+  #folderContainer {
+    border-radius: 25px;
+    padding: 20px;
+    display: flex;
+    flex-flow: column;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  }
+
+  .folder {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+
+  .image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin: 5px;
+  }
+}
 @media (min-device-width: 561px) {
   #menu {
     border-radius: 20px;
