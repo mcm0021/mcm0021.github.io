@@ -111,7 +111,6 @@
     const time = (new Date().getTime() - imageTimeStart) / 1000;
     imageTimeStart = new Date().getTime();
     results.push(true);
-    streak++, 
     streakTime += time;
     totalImages++;
     correctAnswers++;
@@ -127,10 +126,9 @@
     totalImages++;
     wrongAnswers++;
     streak = Math.max(streak, correctAnswersInARow);
-    streak = 0; 
+    correctAnswersInARow = 0; 
     streakTime = Math.max(streakTime, timeForCorrectAnswersInARow);
-    streakTime = 0;
-    correctAnswersInARow = 0;
+    timeForCorrectAnswersInARow = 0;
   }
   
   function start() {
