@@ -1,7 +1,8 @@
-@media (max-device-width: 450) {
+@media (max-device-width: 450px) {
     .resultTable {
         display: grid;
         grid-template-columns: 1fr;
+        justify-content: flex-start;
         grid-row-gap: 10px;
     }
 } 
@@ -10,6 +11,7 @@
     .resultTable {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;	
+        justify-content: flex-start;
         grid-row-gap: 10px;
     }
 }

@@ -86,7 +86,7 @@
       frontToBack_degrees = event.beta;
       //document.getElementById("beta").innerHTML = "Front to back: " + frontToBack_degrees;
       leftToRight_degrees = event.gamma;
-      document.getElementById("gamma").innerHTML = "Left to right: " + leftToRight_degrees;
+      //document.getElementById("gamma").innerHTML = "Left to right: " + leftToRight_degrees;
 
       if (rotation_degrees == null || frontToBack_degrees == null || leftToRight_degrees == null) {
         imageContainer.textContent = "Keine Sensor Daten erkannt.";
@@ -112,7 +112,6 @@
   }
 
   function changeImage() {
-    
     imageContainer.innerHTML = "";
     const img = getRandomImage();
     imageContainer.appendChild(img);
@@ -177,8 +176,6 @@
 
   function showResults() {
     imageContainer.remove();
-    const countDownElement = document.getElementById("countdown");
-    countDownElement.remove();
     var resultElement = document.getElementsByClassName("resultTable")[0];
     var correctAnswersDiv = document.createElement("div");
     correctAnswersDiv.innerHTML = correctAnswers + " von " + totalImages + " richtig";
