@@ -86,7 +86,7 @@
       frontToBack_degrees = event.beta;
       //document.getElementById("beta").innerHTML = "Front to back: " + frontToBack_degrees;
       leftToRight_degrees = event.gamma;
-      //document.getElementById("gamma").innerHTML = "Left to right: " + leftToRight_degrees;
+      document.getElementById("gamma").innerHTML = "Left to right: " + leftToRight_degrees;
 
       if (rotation_degrees == null || frontToBack_degrees == null || leftToRight_degrees == null) {
         imageContainer.textContent = "Keine Sensor Daten erkannt.";

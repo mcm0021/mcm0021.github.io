@@ -16,14 +16,14 @@
     }
 }
 
-div {
+.resultTable div {
     border-radius: 25px;
     padding: 20px; 
     display: flex;
     flex-direction: column;
 }
 
-div img {
+.resultTable div img {
     width: 100px;
     height: 100px;
     object-fit: cover;
