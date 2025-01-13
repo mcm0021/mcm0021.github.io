@@ -48,13 +48,6 @@
     border-radius: 5px;
   }
 
-  .file[type="file"] {
-    width: 90%;
-    font-size: 1em;
-    margin-top: 10px;
-    cursor: pointer; 
-  }
-
   .fa-trash-o {
     font-size: 1.5em; 
     color: #e73c7e; 

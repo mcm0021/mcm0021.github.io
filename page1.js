@@ -8,15 +8,12 @@
       const time = document.getElementById("seconds").value;
       sessionStorage.setItem("time", time);
 
-      console.log(folderCount); 
       const savedFolders = JSON.parse(localStorage.getItem('folders')) || [];
       savedFolders.forEach((folderData, index) => {
 
         const folder = document.getElementById(`folder-${index + 1}`);
         const imagesContainer = folder.querySelector('.images');
-        console.log("not yet");
           if (getComputedStyle(imagesContainer).display === 'block') {
-            console.log("yes");
             folderData.images.forEach((imageSrc) => {
             uploadedImages.push(imageSrc);
         });

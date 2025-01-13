@@ -31,7 +31,6 @@
 
 
   if (storedImages) {
-    console.log("wird ausgeführt");
     unusedImages = JSON.parse(storedImages);
   } else {
     imageContainer.textContent = "Keine Bilder verfügbar.";
