@@ -1,0 +1,23 @@
+@media (max-device-width: 450) {
+    .resultTable {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-row-gap: 10px;
+    }
+} 
+
+@media (min-device-width: 451px) {
+    .resultTable {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;	
+        grid-row-gap: 10px;
+    }
+}
+
+div {
+    border-radius: 25px;
+    padding: 20px; 
+    display: flex;
+    flex-direction: column;
+}
+

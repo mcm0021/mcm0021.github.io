@@ -20,7 +20,9 @@
   let streakTime = 0;
   let logestTimeForCorrectAnswer = 0; 
   let timeForCurrentImage = 0;
-  let imageTimeStart = 0;
+  let imageTimeStart = 0; 
+  let totalTimeCorrectAnswers = 0;
+  let fastestTime = Infinity;
 
   
   if (!time) {
@@ -124,6 +126,8 @@
     correctAnswersInARow++;
     timeForCorrectAnswersInARow += time;
     Math.max(logestTimeForCorrectAnswer, time);
+    totalTimeCorrectAnswers += time;
+    fastestTime = Math.min(fastestTime, time);
   }
 
   function wrongAnswer() {
@@ -138,7 +142,7 @@
   function start() {
     
     askPermission();
-    
+
     imageTimeStart = new Date().getTime();
     const img = getRandomImage();
     imageContainer.appendChild(img);
@@ -152,6 +156,7 @@
         countDownElement.innerHTML = "";
         clearInterval(interval);
         imageContainer.remove();
+        showResults();
       }
     }, 1000);
   }
@@ -174,14 +179,30 @@
     imageContainer.remove();
     const countDownElement = document.getElementById("countdown");
     countDownElement.remove();
-    const resultElement = document.getElementById("results");
-    const resultText = document.createElement("p");
-    resultText.textContent = "Ergebnisse:";
-    resultElement.appendChild(resultText);
-    const correctAnswersElement = document.createElement("p");
-    correctAnswersElement.textContent = "Richtige Antworten: " + correctAnswers + " von " + totalImages;
-    resultElement.appendChild(correctAnswersElement);
-    const wrongAnswersElement = document.createElement("p");
+    var resultElement = document.getElementsByClassName("resultTable")[0];
+    var correctAnswersDiv = document.createElement("div");
+    correctAnswersDiv.innerHTML = correctAnswers + " von " + totalImages + " richtig";
+    resultElement.appendChild(correctAnswersDiv);
+    var streakDiv = document.createElement("div");
+    streakDiv.innerHTML = "Längste Serie: " + streak + " in " + streakTime + "ms";
+    resultElement.appendChild(streakDiv);
+    var longestTimeDiv = document.createElement("div");
+    longestTimeDiv.innerHTML = "Längste Zeit für eine richtige Antwort: " + logestTimeForCorrectAnswer + "ms";
+    resultElement.appendChild(longestTimeDiv);
+    var fastestTimeDiv = document.createElement("div");
+    fastestTimeDiv.innerHTML = "Schnellste Zeit für eine richtige Antwort: " + fastestTime + "ms";
+    resultElement.appendChild(fastestTimeDiv);
+    var averageTimeDiv = document.createElement("div");
+    averageTimeDiv.innerHTML = "Durchschnittliche Zeit für eine richtige Antwort: " + totalTimeCorrectAnswers / correctAnswers + "ms";
+    resultElement.appendChild(averageTimeDiv);
+    for (let i = 0; i < results.length; i++) {
+      var result = document.createElement("div"); 
+      result.style.border =`5px solid ${results[i] ? "green" : "red"}`;
+      const img = document.createElement("img");
+      img.src = usedImagesInOrder[i];
+      result.appendChild(img);
+      resultElement.appendChild(result);
+    }
   }
 
   
