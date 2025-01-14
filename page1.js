@@ -1,10 +1,9 @@
-  
-
   const nextButton = document.getElementById("next-button");
   const uploadedImages = [];
-  
-    nextButton.addEventListener("click", () => {
+  let folderCount = 0;
 
+    //Navigates to the game page and saves the time and the selected images
+    nextButton.addEventListener("click", () => {
       const time = document.getElementById("seconds").value;
       sessionStorage.setItem("time", time);
 
@@ -16,39 +15,18 @@
           if (getComputedStyle(imagesContainer).display === 'block') {
             folderData.images.forEach((imageSrc) => {
             uploadedImages.push(imageSrc);
-        });
+            });
           }
-        
       });
-        /*for (let i = 0; i < folderCount; i++) {
-          const folderId = `folder-${i + 1}`;
-          console.log(folderId);
-          const folder = document.getElementById(folderId);
-          const imagesContainer = folder.querySelector('.images');
-          if (imagesContainer.style.display === 'block') {
-            save
-          }
-        }*/
       sessionStorage.setItem("images", JSON.stringify(uploadedImages));
-      window.location.href = "page2.html"; // Zur zweiten Seite navigieren
+      window.location.href = "page2.html";
     });
 
-  class folder {
-    constructor(name, images, id, onDisplay) {
-      this.id = id;
-      this.name = name;
-      this.images = images;
-      onDisplay = true;
-    }
-  }
-
-  let folderCount = 0;
-
-    // Lade gespeicherte Daten beim Start
+    //Loads the images from the local storage
     window.onload = () => {
       const savedFolders = JSON.parse(localStorage.getItem('folders')) || [];
       savedFolders.forEach((folderData, index) => {
-        createFolder(false); // Ordner erstellen
+        createFolder(false); 
         const folder = document.getElementById(`folder-${index + 1}`);
         folderData.images.forEach((imageSrc) => {
           addImageToFolder(folder, imageSrc);
@@ -56,10 +34,10 @@
       });
     };
 
+    //Creates a new folder
     function createFolder(save = true) {
       const folderContainer = document.getElementById('folderContainer');
       folderCount++;
-      //let folderDataElement= new folder
       const folderElement = document.createElement('div');
       folderElement.className = 'folder';
       folderElement.id = `folder-${folderCount}`;
@@ -71,17 +49,16 @@
         <input class="file" type="file" multiple accept="image/*" onchange="uploadImages(event, '${folderElement.id}')">
         </label>
         <div id="${folderElement.id}" >
-          Choose Folder
-        </div>
+          Hide/Choose
         <div class="images"></div>`;
 
       folderElement.querySelector(`#${folderElement.id}`).addEventListener('click', () => toggleImages(folderElement.id));
-        
       folderContainer.appendChild(folderElement);
 
-      if (save) saveFolders(); // Speicher die neue Struktur
+      if (save) saveFolders(); 
     }
 
+    //Uploads the images to the folder
     function uploadImages(event, folderId) {
       
       const folder = document.getElementById(folderId);
@@ -92,14 +69,14 @@
         reader.onload = () => {
           const imgSrc = reader.result;
           console.log(imgSrc);
-          //const imgSrc = reader.result;
           addImageToFolder(folder, imgSrc);
-          saveFolders(); // Speicher die neuen Bilder
+          saveFolders(); 
         };
         reader.readAsDataURL(file);
       });
     }
 
+    //Adds the image to the folder
     function addImageToFolder(folder, imgSrc) {
       const imagesContainer = folder.querySelector('.images');
       const img = document.createElement('img');
@@ -108,19 +85,21 @@
       imagesContainer.appendChild(img);
     }
 
+    //Toggles the images of one folder on and off
     function toggleImages(folderId) {
       const folder = document.getElementById(folderId);
       const imagesContainer = folder.querySelector('.images');
       imagesContainer.style.display = imagesContainer.style.display === 'none' ? 'block' : 'none';
     }
 
+    //Removes the folder from the page and its content from the local storage
     function deleteFolder(folderId) {
       const folder = document.getElementById(folderId);
       folder.remove();
-      saveFolders(); // Speicher die neue Struktur
-      //folderCount--;
+      saveFolders();
     }
 
+    //Save the folders in the local storage
     function saveFolders() {
       const folders = [];
       document.querySelectorAll('.folder').forEach(folder => {

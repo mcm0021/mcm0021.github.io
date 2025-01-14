@@ -1,3 +1,4 @@
+/*responsive design for mobile devices*/
 @media (max-device-width: 560px) {
   #menu {
     border-radius: 25px;
@@ -42,6 +43,7 @@
     flex-wrap: wrap;
   }
 }
+/*responsive design for tablets and desktops*/
 @media (min-device-width: 561px) {
   #menu {
     border-radius: 20px;
@@ -92,7 +94,6 @@
   }
 
 }
-
 
 body {
   padding-left: 5%;

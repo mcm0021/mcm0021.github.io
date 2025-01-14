@@ -40,6 +40,7 @@
     start();  
   });
 
+  //Selects a random image from the unused images from the local storage
   function getRandomImage() {
     if (unusedImages.length > 0 && usedImagesInOrder.length < unusedImages.length) {
       const images = unusedImages;
@@ -60,10 +61,12 @@
     }    
   }
   
+  //Returns a random number between 0 and the given max
   function randomNumber(max) {
     return Math.floor(Math.random() * (max + 1));
   }
 
+  //Only necassary on IOS to get the sensor data
   function askPermission() {
 
     if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
@@ -77,6 +80,9 @@
     }
   }
 
+  //Receives the sensor data and checks if the device is tilted to the right or left respectively in our case up or down
+  //If movement is detected the correct or wrong answer is processed and the image is changed
+  //After this the device has to be in a neutral position to detect the next movement
   function getSensorData() {
 
     window.addEventListener('deviceorientation', (event) => {
@@ -106,6 +112,7 @@
     });
   }
 
+  //Changes the image 
   function changeImage() {
     imageContainer.innerHTML = "";
     const img = getRandomImage();
@@ -114,6 +121,7 @@
     }
   }
 
+  //Actions when a correct answer is detected
   function rightAnswer() {
     const time = (new Date().getTime() - imageTimeStart) / 1000;
     imageTimeStart = new Date().getTime();
@@ -128,6 +136,7 @@
     fastestTime = Math.min(fastestTime, time);
   }
 
+  //Actions when a wrong answer is detected 
   function wrongAnswer() {
     results.push(false);
     totalImages++;
@@ -138,6 +147,7 @@
     timeForCorrectAnswersInARow = 0;
   }
   
+  //Starts the game
   function start() {
     
     askPermission();
@@ -159,6 +169,7 @@
     }, 1000);
   }
 
+  //Shows the results
   function showResults() {
     imageContainer.remove();
     var resultElement = document.getElementsByClassName("resultTable")[0];
