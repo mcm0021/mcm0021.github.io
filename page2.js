@@ -88,6 +88,7 @@
       }
     
       if (totalImages == images.length) {
+        event.target.removeEventListener('deviceorientation', getSensorData);
         const countDownElement = document.getElementById("countdown");
         countDownElement.innerHTML = "";
         clearInterval(interval);
