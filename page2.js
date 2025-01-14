@@ -33,7 +33,7 @@
   if (storedImages) {
     unusedImages = JSON.parse(storedImages);
   } else {
-    imageContainer.textContent = "Keine Bilder verfügbar.";
+    imageContainer.textContent = "No images selected";
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -42,23 +42,15 @@
 
   //Selects a random image from the unused images from the local storage
   function getRandomImage() {
-    if (unusedImages.length > 0 && usedImagesInOrder.length < unusedImages.length) {
-      const images = unusedImages;
-      const img = document.createElement("img");
-      let randomImage;
-      do {
-        randomImage = images[randomNumber(images.length - 1)]
-      } while (usedImagesInOrder.includes(randomImage));
-      img.src = randomImage
-      usedImagesInOrder.push(randomImage);
-      return img; 
-    } else {
-      const countDownElement = document.getElementById("countdown");
-      countDownElement.innerHTML = "";
-      clearInterval(interval);
-      showResults();
-      return null;
-    }    
+    const images = unusedImages;
+    const img = document.createElement("img");
+    let randomImage;
+    do {
+      randomImage = images[randomNumber(images.length - 1)]
+    } while (usedImagesInOrder.includes(randomImage));
+    img.src = randomImage
+    usedImagesInOrder.push(randomImage);
+    return img;
   }
   
   //Returns a random number between 0 and the given max
@@ -92,7 +84,7 @@
       leftToRight_degrees = event.gamma;
 
       if (rotation_degrees == null || frontToBack_degrees == null || leftToRight_degrees == null) {
-        imageContainer.textContent = "Keine Sensor Daten erkannt.";
+        imageContainer.textContent = "No sensor data";
       }
     
 
@@ -114,11 +106,16 @@
 
   //Changes the image 
   function changeImage() {
-    imageContainer.innerHTML = "";
-    const img = getRandomImage();
-    if (img != null) {
+    if (unusedImages.length > 0 && usedImagesInOrder.length < unusedImages.length) {
+      imageContainer.innerHTML = "";
+      const img = getRandomImage();
       imageContainer.appendChild(img);
-    }
+    } else {
+      const countDownElement = document.getElementById("countdown");
+      countDownElement.innerHTML = "";
+      clearInterval(interval);
+      showResults();
+    }     
   }
 
   //Actions when a correct answer is detected
@@ -174,19 +171,19 @@
     imageContainer.remove();
     var resultElement = document.getElementsByClassName("resultTable")[0];
     var correctAnswersDiv = document.createElement("div");
-    correctAnswersDiv.innerHTML = correctAnswers + " von " + totalImages + " richtig";
+    correctAnswersDiv.innerHTML = correctAnswers + " out of " + totalImages + " correct";
     resultElement.appendChild(correctAnswersDiv);
     var streakDiv = document.createElement("div");
-    streakDiv.innerHTML = "Längste Serie: " + streak + " in " + streakTime + "s";
+    streakDiv.innerHTML = "Longest: " + streak + " in " + streakTime + "s";
     resultElement.appendChild(streakDiv);
     var longestTimeDiv = document.createElement("div");
-    longestTimeDiv.innerHTML = "Längste Zeit für eine richtige Antwort: " + logestTimeForCorrectAnswer + "s";
+    longestTimeDiv.innerHTML = "Longest time for correct answer: " + logestTimeForCorrectAnswer + "s";
     resultElement.appendChild(longestTimeDiv);
     var fastestTimeDiv = document.createElement("div");
-    fastestTimeDiv.innerHTML = "Schnellste Zeit für eine richtige Antwort: " + fastestTime + "s";
+    fastestTimeDiv.innerHTML = "Fastest time for correct answer: " + fastestTime + "s";
     resultElement.appendChild(fastestTimeDiv);
     var averageTimeDiv = document.createElement("div");
-    averageTimeDiv.innerHTML = "Durchschnittliche Zeit für eine richtige Antwort: " + totalTimeCorrectAnswers / correctAnswers + "s";
+    averageTimeDiv.innerHTML = "Average timer for correct answer: " + totalTimeCorrectAnswers / correctAnswers + "s";
     resultElement.appendChild(averageTimeDiv);
     for (let i = 0; i < results.length; i++) {
       var result = document.createElement("div"); 

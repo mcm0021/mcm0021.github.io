@@ -68,7 +68,6 @@
         const reader = new FileReader();
         reader.onload = () => {
           const imgSrc = reader.result;
-          console.log(imgSrc);
           addImageToFolder(folder, imgSrc);
           saveFolders(); 
         };
