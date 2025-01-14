@@ -76,39 +76,40 @@
   //If movement is detected the correct or wrong answer is processed and the image is changed
   //After this the device has to be in a neutral position to detect the next movement
   function getSensorData() {
+    window.addEventListener('devicemotion', sensorData); 
+  }
 
-    window.addEventListener('deviceorientation', (event) => {
+  function sensorData(event) {
 
-      rotation_degrees = event.alpha;
-      frontToBack_degrees = event.beta;
-      leftToRight_degrees = event.gamma;
+    rotation_degrees = event.alpha;
+    frontToBack_degrees = event.beta;
+    leftToRight_degrees = event.gamma;
 
-      if (rotation_degrees == null || frontToBack_degrees == null || leftToRight_degrees == null) {
-        imageContainer.textContent = "No sensor data";
-      }
-    
-      if (totalImages == images.length) {
-        event.target.removeEventListener('deviceorientation', getSensorData);
-        const countDownElement = document.getElementById("countdown");
-        countDownElement.innerHTML = "";
-        clearInterval(interval);
-        showResults();
-      }
+    if (rotation_degrees == null || frontToBack_degrees == null || leftToRight_degrees == null) {
+      imageContainer.textContent = "No sensor data";
+    }
+  
+    if (totalImages == images.length) {
+      event.target.removeEventListener('deviceorientation', sensorData);
+      const countDownElement = document.getElementById("countdown");
+      countDownElement.innerHTML = "";
+      clearInterval(interval);
+      showResults();
+    }
 
-      if (!movementActive && leftToRight_degrees < rightTreshold && leftToRight_degrees > 0) {
-        movementActive = true;
-        rightAnswer();
-        changeImage();
-      } else if (!movementActive && leftToRight_degrees > wrongTreshold && leftToRight_degrees < 0) {
-        movementActive = true;
-        wrongAnswer();
-        changeImage();
-      }
+    if (!movementActive && leftToRight_degrees < rightTreshold && leftToRight_degrees > 0) {
+      movementActive = true;
+      rightAnswer();
+      changeImage();
+    } else if (!movementActive && leftToRight_degrees > wrongTreshold && leftToRight_degrees < 0) {
+      movementActive = true;
+      wrongAnswer();
+      changeImage();
+    }
 
-      if (movementActive && (leftToRight_degrees > deadZoneOne || leftToRight_degrees < deadZoneTwo)) {
-        movementActive = false;
-      }
-    });
+    if (movementActive && (leftToRight_degrees > deadZoneOne || leftToRight_degrees < deadZoneTwo)) {
+      movementActive = false;
+    }
   }
 
   //Changes the image 
