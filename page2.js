@@ -1,7 +1,7 @@
     
   const imageContainer = document.getElementById("image-container");
   const storedImages = sessionStorage.getItem("images");
-  let unusedImages;
+  let images;
   let usedImagesInOrder = [];
   let movementActive = false;
   const rightTreshold = 20; 
@@ -31,7 +31,7 @@
 
 
   if (storedImages) {
-    unusedImages = JSON.parse(storedImages);
+    images = JSON.parse(storedImages);
   } else {
     imageContainer.textContent = "No images selected";
   }
@@ -42,7 +42,7 @@
 
   //Selects a random image from the unused images from the local storage
   function getRandomImage() {
-    const images = unusedImages;
+
     const img = document.createElement("img");
     let randomImage;
     do {
@@ -87,7 +87,7 @@
         imageContainer.textContent = "No sensor data";
       }
     
-      if (totalImages == unusedImages.length) {
+      if (totalImages == images.length) {
         const countDownElement = document.getElementById("countdown");
         countDownElement.innerHTML = "";
         clearInterval(interval);
@@ -112,7 +112,7 @@
 
   //Changes the image 
   function changeImage() {
-    if (unusedImages.length > 0 && usedImagesInOrder.length < unusedImages.length) {
+    if (images.length > 0 && usedImagesInOrder.length < images.length) {
       imageContainer.innerHTML = "";
       const img = getRandomImage();
       imageContainer.appendChild(img);
