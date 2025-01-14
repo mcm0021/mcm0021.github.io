@@ -72,13 +72,14 @@
     }
   }
 
+  //Sets the event listener for the sensor data up 
+  function getSensorData() {
+    window.addEventListener('deviceorientation', sensorData); 
+  }
+
   //Receives the sensor data and checks if the device is tilted to the right or left respectively in our case up or down
   //If movement is detected the correct or wrong answer is processed and the image is changed
   //After this the device has to be in a neutral position to detect the next movement
-  function getSensorData() {
-    window.addEventListener('devicemotion', sensorData); 
-  }
-
   function sensorData(event) {
 
     rotation_degrees = event.alpha;
