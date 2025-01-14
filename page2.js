@@ -52,9 +52,11 @@
       usedImagesInOrder.push(randomImage);
       return img; 
     } else {
-      clearInterval(interval);
+      const countDownElement = document.getElementById("countdown");
       countDownElement.innerHTML = "";
+      clearInterval(interval);
       showResults();
+      return null;
     }    
   }
   
@@ -107,7 +109,9 @@
   function changeImage() {
     imageContainer.innerHTML = "";
     const img = getRandomImage();
-    imageContainer.appendChild(img);
+    if (img != null) {
+      imageContainer.appendChild(img);
+    }
   }
 
   function rightAnswer() {
