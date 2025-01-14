@@ -74,14 +74,18 @@
 
   //Sets the event listener for the sensor data up 
   function getSensorData() {
-    window.addEventListener('deviceorientation', sensorData); 
+    window.addEventListener('deviceorientation', sensorData, true); 
   }
 
+  let listenerRemoved = false; 
   //Receives the sensor data and checks if the device is tilted to the right or left respectively in our case up or down
   //If movement is detected the correct or wrong answer is processed and the image is changed
   //After this the device has to be in a neutral position to detect the next movement
   function sensorData(event) {
-
+    if (listenerRemoved) {
+      return;
+    }
+    
     rotation_degrees = event.alpha;
     frontToBack_degrees = event.beta;
     leftToRight_degrees = event.gamma;
@@ -91,6 +95,7 @@
     }
   
     if (totalImages == images.length) {
+      listenerRemoved = true;
       event.target.removeEventListener('deviceorientation', sensorData);
       const countDownElement = document.getElementById("countdown");
       countDownElement.innerHTML = "";
