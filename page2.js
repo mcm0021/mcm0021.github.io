@@ -193,7 +193,7 @@
     var averageTimeDiv = document.createElement("div");
     averageTimeDiv.innerHTML = "Average timer for correct answer: " + totalTimeCorrectAnswers / correctAnswers + "s";
     resultElement.appendChild(averageTimeDiv);
-    for (let i = 0; i < results.length; i++) {
+    for (let i = 0; i < usedImagesInOrder.length; i++) {
       var result = document.createElement("div"); 
       result.style.border =`5px solid ${results[i] ? "green" : "red"}`;
       const img = document.createElement("img");
