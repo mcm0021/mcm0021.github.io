@@ -4,6 +4,7 @@
   let images;
   let usedImagesInOrder = [];
   let movementActive = false;
+  let stopped = false;
   const rightTreshold = 20; 
   const wrongTreshold = -20;
   const deadZoneOne = 75; 
@@ -43,14 +44,22 @@
   //Selects a random image from the unused images from the local storage
   function getRandomImage() {
 
-    const img = document.createElement("img");
-    let randomImage;
-    do {
-      randomImage = images[randomNumber(images.length - 1)]
-    } while (usedImagesInOrder.includes(randomImage));
-    img.src = randomImage
-    usedImagesInOrder.push(randomImage);
-    return img;
+    if (images.length > 0 && usedImagesInOrder.length < images.length) {
+      const img = document.createElement("img");
+      let randomImage;
+      do {
+        randomImage = images[randomNumber(images.length - 1)]
+      } while (usedImagesInOrder.includes(randomImage));
+      img.src = randomImage
+      usedImagesInOrder.push(randomImage);
+      return img; 
+    } else {
+      const countDownElement = document.getElementById("countdown");
+      countDownElement.innerHTML = "";
+      clearInterval(interval);
+      showResults();
+      return null;
+    } 
   }
   
   //Returns a random number between 0 and the given max
@@ -83,6 +92,10 @@
       frontToBack_degrees = event.beta;
       leftToRight_degrees = event.gamma;
 
+      if (stopped) {
+        return;
+      }
+
       if (rotation_degrees == null || frontToBack_degrees == null || leftToRight_degrees == null) {
         imageContainer.textContent = "No sensor data";
       }
@@ -105,17 +118,11 @@
 
   //Changes the image 
   function changeImage() {
-    
-    if (images.length > 0 && usedImagesInOrder.length < images.length) {
-      imageContainer.innerHTML = "";
-      const img = getRandomImage();
+    imageContainer.innerHTML = "";
+    const img = getRandomImage();
+    if (img != null) {
       imageContainer.appendChild(img);
-    } else {
-      const countDownElement = document.getElementById("countdown"); 
-      countDownElement.innerHTML = "";
-      clearInterval(interval);
-      showResults();
-    }    
+    }
   }
 
   //Actions when a correct answer is detected
@@ -168,6 +175,7 @@
 
   //Shows the results
   function showResults() {
+    stopped = true;
     imageContainer.remove();
     var resultElement = document.getElementsByClassName("resultTable")[0];
     var correctAnswersDiv = document.createElement("div");
