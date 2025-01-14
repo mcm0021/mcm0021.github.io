@@ -103,21 +103,19 @@
     });
   }
 
-  const result = false; 
   //Changes the image 
   function changeImage() {
     
-    if (!result && totalImages >= images.length) {
-      result = true;
-      document.getElementById("countdown").innerHTML = "";
+    if (images.length > 0 && usedImagesInOrder.length < images.length) {
+      imageContainer.innerHTML = "";
+      const img = getRandomImage();
+      imageContainer.appendChild(img);
+    } else {
+      const countDownElement = document.getElementById("countdown"); 
+      countDownElement.innerHTML = "";
       clearInterval(interval);
       showResults();
-      return;
-    }
-    ima
-    geContainer.innerHTML = "";
-    const img = getRandomImage();
-    imageContainer.appendChild(img);
+    }    
   }
 
   //Actions when a correct answer is detected
