@@ -120,16 +120,9 @@
 
   //Changes the image 
   function changeImage() {
-    if (images.length > 0 && usedImagesInOrder.length < images.length) {
-      imageContainer.innerHTML = "";
+    imageContainer.innerHTML = "";
       const img = getRandomImage();
       imageContainer.appendChild(img);
-    } else {
-      const countDownElement = document.getElementById("countdown");
-      countDownElement.innerHTML = "";
-      clearInterval(interval);
-      showResults();
-    }     
   }
 
   //Actions when a correct answer is detected
