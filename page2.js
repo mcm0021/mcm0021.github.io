@@ -87,6 +87,12 @@
         imageContainer.textContent = "No sensor data";
       }
     
+      if (totalImages == unusedImages.length) {
+        const countDownElement = document.getElementById("countdown");
+        countDownElement.innerHTML = "";
+        clearInterval(interval);
+        showResults();
+      }
 
       if (!movementActive && leftToRight_degrees < rightTreshold && leftToRight_degrees > 0) {
         movementActive = true;
