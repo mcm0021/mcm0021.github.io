@@ -10,6 +10,7 @@
   const deadZoneTwo = -75;
   let results = [];
   let time = sessionStorage.getItem("time"); 
+  let interval;
   let totalImages = 0;
   let correctAnswers = 0;
   let wrongAnswers = 0;
@@ -51,7 +52,9 @@
       usedImagesInOrder.push(randomImage);
       return img; 
     } else {
-      return "Keine Bilder verfügbar.";
+      clearInterval(interval);
+      countDownElement.innerHTML = "";
+      showResults();
     }    
   }
   
@@ -141,7 +144,7 @@
     let countDownOne = time;
     const countDownElement = document.getElementById("countdown");
     countDownElement.innerHTML = countDownOne;
-    const interval = setInterval(() => {
+    interval = setInterval(() => {
       countDownOne--;
       countDownElement.innerHTML = countDownOne;
       if (countDownOne == 0) {
